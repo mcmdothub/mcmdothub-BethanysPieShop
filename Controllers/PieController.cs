@@ -1,5 +1,4 @@
 ﻿using mcmdothub_BethanysPieShop.Models;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace mcmdothub_BethanysPieShop.Controllers
@@ -17,6 +16,7 @@ namespace mcmdothub_BethanysPieShop.Controllers
 
         public IActionResult List()
         {
+            ViewBag.CurrentCategory = "Cheese cakes";
             return View(_pieRepository.AllPies);
         }
     }
