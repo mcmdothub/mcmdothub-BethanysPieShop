@@ -16,7 +16,7 @@
                     CategoryId = 2,
                     CategoryName = "Cheese cakes",
                     Description = "Cheesy all the way"
-                }
+                },
                 new Category
                 {
                     CategoryId = 3,
