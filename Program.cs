@@ -31,7 +31,11 @@ if (app.Environment.IsDevelopment())
 }
 
 // will enable our application to let MVC handle incoming requests on controllers
-app.MapDefaultControllerRoute();
+app.MapDefaultControllerRoute();            // "{controller=Home}/{action=Index}/{id?}"
+
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // pass in app (application builder) in the Seed method
 DbInitializer.Seed(app);
