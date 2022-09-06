@@ -24,7 +24,7 @@ namespace mcmdothub_BethanysPieShop.Controllers
 
             // use my constructor of PieListViewModel and pass in the "AllPies" + the current category
             // and return to my view
-            PieListViewModel piesListViewModel = new PieListViewModel(_pieRepository.AllPies, "Cheese cakes");
+            PieListViewModel piesListViewModel = new PieListViewModel(_pieRepository.AllPies, "All pies");
 
             return View(piesListViewModel);
         }
