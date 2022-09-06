@@ -18,6 +18,7 @@ builder.Services.AddDbContext<BethanysPieShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:BethanysPieShopDbContextConnection"]);
 });
 
+// application bulder
 var app = builder.Build();
 
 // look for incoming requests for static files(JPEG,CSS files etc) inside wwwroot folder
@@ -31,5 +32,8 @@ if (app.Environment.IsDevelopment())
 
 // will enable our application to let MVC handle incoming requests on controllers
 app.MapDefaultControllerRoute();
+
+// pass in app (application builder) in the Seed method
+DbInitializer.Seed(app);
 
 app.Run();
