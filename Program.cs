@@ -3,8 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>();
-builder.Services.AddScoped<IPieRepository, MockPieRepository>();
+// Initial with MockData without DbContext
+//builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+//builder.Services.AddScoped<IPieRepository, MockPieRepository>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPieRepository, PieRepository>();
 
 // enable MVC in your application
 builder.Services.AddControllersWithViews();
