@@ -16,17 +16,43 @@ namespace mcmdothub_BethanysPieShop.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        public IActionResult List()
+        // Old method
+        //public IActionResult List()
+        //{
+        //    // instead of passing the data in two ways
+        //    // ViewBag.CurrentCategory = "Cheese cakes";
+        //    // return View(_pieRepository.AllPies);
+
+        //    // use my constructor of PieListViewModel and pass in the "AllPies" + the current category
+        //    // and return to my view
+        //    PieListViewModel piesListViewModel = new PieListViewModel(_pieRepository.AllPies, "All pies");
+
+        //    return View(piesListViewModel);
+        //}
+
+        // new List action method that accepts a category
+        public ViewResult List(string category)
         {
-            // instead of passing the data in two ways
-            // ViewBag.CurrentCategory = "Cheese cakes";
-            // return View(_pieRepository.AllPies);
+            IEnumerable<Pie> pies;
+            string? currentCategory;
 
-            // use my constructor of PieListViewModel and pass in the "AllPies" + the current category
-            // and return to my view
-            PieListViewModel piesListViewModel = new PieListViewModel(_pieRepository.AllPies, "All pies");
+            // check if the category IsNullOrEmpty meaning we want to see AllPies
+            if (string.IsNullOrEmpty(category))
+            {
+                pies = _pieRepository.AllPies.OrderBy(p => p.PieId);
+                currentCategory = "All pies";
+            }
+            else
+            {
+                // if not empty we go to database => ask for AllPies where the CategoryName == category => order them by PieId
+                // and set after the currentCategory to the name of the selected category
+                pies = _pieRepository.AllPies.Where(p => p.Category.CategoryName == category)
+                    .OrderBy(p => p.PieId);
+                currentCategory = _categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
+            }
 
-            return View(piesListViewModel);
+            // return the view passing in a PieListViewModel using the pies and the currentCategory
+            return View(new PieListViewModel(pies, currentCategory));
         }
 
         public IActionResult Details(int id)
