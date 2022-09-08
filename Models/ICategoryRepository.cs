@@ -2,6 +2,6 @@
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> AllCategories { get; } 
+        IEnumerable<Category> AllCategories { get; }
     }
 }
