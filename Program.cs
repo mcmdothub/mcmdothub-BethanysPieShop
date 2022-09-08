@@ -5,6 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+// add Service for Razor Pages
+builder.Services.AddRazorPages();
+
 //builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>();
 //builder.Services.AddScoped<IPieRepository, MockPieRepository>();
 
@@ -37,6 +40,9 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// middleware for support for RazorPages / enables Razor PageModel
+app.MapRazorPages();
 
 DbInitializer.Seed(app);
 
